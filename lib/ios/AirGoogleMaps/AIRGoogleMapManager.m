@@ -577,9 +577,9 @@ RCT_EXPORT_METHOD(setIndoorActiveLevelIndex:(nonnull NSNumber *)reactTag
   return [googleMapView didTapMarker:marker];
 }
 
-- (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSPolygon *)polygon {
+- (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay {
   AIRGoogleMap *googleMapView = (AIRGoogleMap *)mapView;
-  [googleMapView didTapPolygon:polygon];
+  [googleMapView didTapOverlay:overlay];
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {

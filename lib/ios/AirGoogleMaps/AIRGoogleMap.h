@@ -62,8 +62,7 @@
 
 - (void)didPrepareMap;
 - (BOOL)didTapMarker:(GMSMarker *)marker;
-- (void)didTapPolyline:(GMSPolyline *)polyline;
-- (void)didTapPolygon:(GMSPolygon *)polygon;
+- (void)didTapOverlay:(GMSOverlay *)overlay;
 - (void)didTapAtCoordinate:(CLLocationCoordinate2D)coordinate;
 - (void)didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate;
 - (void)didChangeCameraPosition:(GMSCameraPosition *)position;

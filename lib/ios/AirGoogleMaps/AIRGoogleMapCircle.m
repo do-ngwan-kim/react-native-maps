@@ -15,7 +15,7 @@
 - (instancetype)init
 {
   if (self = [super init]) {
-    _circle = [[GMSCircle alloc] init];
+    _circle = [[AIRGMSCircle alloc] init];
   }
   return self;
 }
@@ -54,6 +54,17 @@
 {
   _zIndex = zIndex;
   _circle.zIndex = zIndex;
+}
+
+- (void)setTappable:(BOOL)tappable
+{
+  _tappable = tappable;
+  _circle.tappable = tappable;
+}
+
+- (void)setOnPress:(RCTBubblingEventBlock)onPress
+{
+  _circle.onPress = onPress;
 }
 
 @end

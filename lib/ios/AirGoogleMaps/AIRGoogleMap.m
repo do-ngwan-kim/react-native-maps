@@ -296,24 +296,28 @@ id regionAsJSON(MKCoordinateRegion region) {
   return NO;
 }
 
-- (void)didTapPolyline:(GMSOverlay *)polyline {
-  AIRGMSPolyline *airPolyline = (AIRGMSPolyline *)polyline;
-
-  id event = @{@"action": @"polyline-press",
-               @"id": airPolyline.identifier ?: @"unknown",
-               };
-
-   if (airPolyline.onPress) airPolyline.onPress(event);
-}
-
-- (void)didTapPolygon:(GMSOverlay *)polygon {
-    AIRGMSPolygon *airPolygon = (AIRGMSPolygon *)polygon;
-
+- (void)didTapOverlay:(GMSOverlay *)overlay {
+  if ([overlay isKindOfClass:[GMSPolyline class]]) {
+    AIRGMSPolyline *airPolyline = (AIRGMSPolyline *)overlay;
+    id event = @{@"action": @"polyline-press",
+                 @"id": airPolyline.identifier ?: @"unknown",
+                 };
+    if (airPolyline.onPress) airPolyline.onPress(event);
+  }
+  else if ([overlay isKindOfClass:[GMSPolygon class]]) {
+    AIRGMSPolygon *airPolygon = (AIRGMSPolygon *)overlay;
     id event = @{@"action": @"polygon-press",
                  @"id": airPolygon.identifier ?: @"unknown",
                  };
-
     if (airPolygon.onPress) airPolygon.onPress(event);
+  }
+  else if ([overlay isKindOfClass:[GMSCircle class]]) {
+    AIRGMSCircle *airCircle = (AIRGMSCircle *)overlay;
+    id event = @{@"action": @"circle-press",
+                 @"id": airCircle.identifier ?: @"unknown",
+                 };
+    if (airCircle.onPress) airCircle.onPress(event);
+  }
 }
 
 - (void)didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
