@@ -346,20 +346,29 @@ CGRect unionRect(CGRect a, CGRect b) {
 }
 
 - (void)setText:(NSString *)text {
-    if (!_realMarker.iconView || ![_realMarker.iconView isKindOfClass:[UILabel class]]) {
-        UILabel *label = [[UILabel alloc] init];
-        _realMarker.iconView = label;
-    }
-    [(UILabel *)_realMarker.iconView setText:text];
-    [(UILabel *)_realMarker.iconView sizeToFit];
+  if (!_realMarker.iconView || ![_realMarker.iconView isKindOfClass:[UILabel class]]) {
+    UILabel *label = [[UILabel alloc] init];
+    _realMarker.iconView = label;
+  }
+  [(UILabel *)_realMarker.iconView setText:text];
+  [(UILabel *)_realMarker.iconView sizeToFit];
 }
 
 - (void)setTextColor:(UIColor *)textColor {
-    if (!_realMarker.iconView || ![_realMarker.iconView isKindOfClass:[UILabel class]]) {
-        UILabel *label = [[UILabel alloc] init];
-        _realMarker.iconView = label;
-    }
-    [(UILabel *)_realMarker.iconView setTextColor:textColor];
+  if (!_realMarker.iconView || ![_realMarker.iconView isKindOfClass:[UILabel class]]) {
+    UILabel *label = [[UILabel alloc] init];
+    _realMarker.iconView = label;
+  }
+  [(UILabel *)_realMarker.iconView setTextColor:textColor];
+}
+
+- (void)setTextSize:(CGFloat)textSize {
+  if (!_realMarker.iconView || ![_realMarker.iconView isKindOfClass:[UILabel class]]) {
+    UILabel *label = [[UILabel alloc] init];
+    _realMarker.iconView = label;
+  }
+  [(UILabel *)_realMarker.iconView setFont:[UIFont systemFontOfSize:textSize]];
+  [(UILabel *)_realMarker.iconView sizeToFit];
 }
 
 - (void)setTitle:(NSString *)title {

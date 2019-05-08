@@ -29,6 +29,8 @@
 @property (nonatomic, copy) NSString *imageSrc;
 @property (nonatomic, copy) NSString *iconSrc;
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) UIColor *textColor;
+@property (nonatomic, assign) CGFloat textSize;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, strong) UIColor *pinColor;
