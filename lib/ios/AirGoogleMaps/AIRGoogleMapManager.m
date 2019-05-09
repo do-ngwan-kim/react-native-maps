@@ -102,7 +102,8 @@ RCT_EXPORT_VIEW_PROPERTY(maxZoomLevel, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(kmlSrc, NSString)
 
 RCT_EXPORT_METHOD(scaleView:(nonnull NSNumber *)reactTag
-                  :(CGFloat)scale)
+                  withScale:(CGFloat)scale
+                  withDuration:(CGFloat)duration)
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
     id view = viewRegistry[reactTag];
@@ -111,7 +112,9 @@ RCT_EXPORT_METHOD(scaleView:(nonnull NSNumber *)reactTag
     } else {
       AIRGoogleMap *mapView = (AIRGoogleMap *)view;
       mapView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-      mapView.transform = CGAffineTransformMakeScale(scale,scale);
+      [UIView animateWithDuration:duration/1000 animations:^{
+        mapView.transform = CGAffineTransformMakeScale(scale,scale);
+      }];
     }
   }];
 }
