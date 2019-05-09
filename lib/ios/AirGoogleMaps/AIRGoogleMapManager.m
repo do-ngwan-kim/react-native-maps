@@ -59,7 +59,7 @@ RCT_EXPORT_MODULE()
 
   UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
   [map addGestureRecognizer:pinch];
-
+  
   return map;
 }
 
@@ -100,6 +100,21 @@ RCT_EXPORT_VIEW_PROPERTY(mapType, GMSMapViewType)
 RCT_EXPORT_VIEW_PROPERTY(minZoomLevel, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(maxZoomLevel, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(kmlSrc, NSString)
+
+RCT_EXPORT_METHOD(scaleView:(nonnull NSNumber *)reactTag
+                  :(CGFloat)scale)
+{
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+    id view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[AIRGoogleMap class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting AIRGoogleMap, got: %@", view);
+    } else {
+      AIRGoogleMap *mapView = (AIRGoogleMap *)view;
+      mapView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+      mapView.transform = CGAffineTransformMakeScale(scale,scale);
+    }
+  }];
+}
 
 RCT_EXPORT_METHOD(getCamera:(nonnull NSNumber *)reactTag
                   resolver: (RCTPromiseResolveBlock)resolve
